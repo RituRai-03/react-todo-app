@@ -1,0 +1,408 @@
+/* --- THEME ROOT CONFIGURATIONS --- */
+
+.dark-theme {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-primary: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.3);
+  --accent-success: #10b981;
+  --danger: #f43f5e;
+  --input-bg: rgba(0, 0, 0, 0.2);
+  --item-bg: rgba(255, 255, 255, 0.03);
+  --item-hover: rgba(255, 255, 255, 0.07);
+  --checkbox-border: #475569;
+  --empty-icon: #475569;
+}
+
+.light-theme {
+  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(0, 0, 0, 0.06);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --accent-primary: #4f46e5;
+  --accent-glow: rgba(79, 70, 229, 0.15);
+  --accent-success: #10b981;
+  --danger: #e11d48;
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --item-bg: rgba(0, 0, 0, 0.02);
+  --item-hover: rgba(0, 0, 0, 0.04);
+  --checkbox-border: #cbd5e1;
+  --empty-icon: #cbd5e1;
+}
+
+/* --- CORE LAYOUT & BASE CONFIG --- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.dashboard-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--bg-gradient);
+  transition: background 0.5s ease; /* Smooth global theme transitions */
+}
+
+/* Blurred Ambient Glow Elements */
+.blob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.2;
+  transition: all 0.5s ease;
+}
+.blob-1 {
+  background: var(--accent-primary);
+  top: 15%;
+  left: 20%;
+}
+.blob-2 {
+  background: #d946ef;
+  bottom: 15%;
+  right: 20%;
+}
+.light-theme .blob {
+  opacity: 0.12; /* Tone down blobs for light layout */
+}
+
+/* Modern Card Layout */
+.todo-card {
+  position: relative;
+  z-index: 1;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 35px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transition: background 0.4s ease, border 0.4s ease;
+}
+
+/* Header & Theme alignment */
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+h1 {
+  color: var(--text-main);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  transition: color 0.3s;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 2px;
+  transition: color 0.3s;
+}
+
+/* Premium Interactive Theme Controller Button */
+.theme-toggle-btn {
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+  background: var(--item-hover);
+}
+
+.theme-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Dynamic Stats Display badge */
+.progress-badge {
+  background: var(--input-bg);
+  padding: 6px 12px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--card-border);
+}
+
+.progress-badge .percentage {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.progress-badge .label {
+  display: block;
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* Fluid Progress Track Indicators */
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: var(--input-bg);
+  border-radius: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), #a855f7);
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Input UX Formatting */
+.modern-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.modern-form input {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1px solid var(--card-border);
+  padding: 14px 18px;
+  border-radius: 14px;
+  color: var(--text-main);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.modern-form input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.modern-form input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.modern-form button {
+  background: var(--accent-primary);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+.modern-form button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.modern-form button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Content Lists Panel formatting */
+.task-container {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.task-container::-webkit-scrollbar {
+  width: 6px;
+}
+.task-container::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 10px;
+}
+
+.premium-list {
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--item-bg);
+  border: 1px solid var(--card-border);
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+  animation: fadeIn 0.3s ease;
+}
+
+.task-item:hover {
+  background: var(--item-hover);
+  transform: translateX(2px);
+}
+
+/* Checkbox & Checkmark customizations */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  flex: 1;
+  position: relative;
+}
+
+.checkbox-wrapper input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-checkmark {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--checkbox-border);
+  border-radius: 7px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-wrapper:hover input ~ .custom-checkmark {
+  border-color: var(--accent-primary);
+}
+
+.checkbox-wrapper input:checked ~ .custom-checkmark {
+  background: var(--accent-success);
+  border-color: var(--accent-success);
+}
+
+.custom-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-wrapper input:checked ~ .custom-checkmark:after {
+  display: block;
+}
+
+.task-text {
+  color: var(--text-main);
+  font-size: 15px;
+  transition: color 0.25s;
+  user-select: none;
+}
+
+/* Completed Task Variations */
+.task-item.completed {
+  background: rgba(16, 185, 129, 0.03);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.task-item.completed .task-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* Action Rows (Delete) Control buttons */
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+.task-item:hover .action-btn {
+  opacity: 1;
+}
+
+.action-btn.delete:hover {
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--danger);
+}
+
+.action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Minimalist Empty States */
+.empty-state {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--text-muted);
+}
+
+.empty-state svg {
+  width: 48px;
+  height: 48px;
+  color: var(--empty-icon);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 14px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
